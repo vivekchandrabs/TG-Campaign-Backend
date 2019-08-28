@@ -1,2 +1,2 @@
 web: gunicorn speckbit_bot.wsgi
-worker: celery -A speckbit_bot worker -l debug
+worker: celery worker --telegram_bot=tasks.app
