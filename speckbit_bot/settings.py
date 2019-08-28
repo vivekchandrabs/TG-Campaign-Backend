@@ -99,7 +99,7 @@ DATABASES = {
 
 # CELERY_BROKER_URL = 'redis://localhost:6379'
 
-CELERY_BROKER_URL = redis.from_url(os.environ['HEROKU_REDIS_BLACK_URL'])
+CELERY_BROKER_URL = os.environ['HEROKU_REDIS_BLACK_URL']
 BROKER_TRANSPORT = 'redis'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
