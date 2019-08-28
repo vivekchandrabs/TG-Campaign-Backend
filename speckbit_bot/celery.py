@@ -17,5 +17,9 @@ app = Celery('speckbit_bot')
 app.conf.broker_url = os.environ['HEROKU_REDIS_BLACK_URL']
 app.conf.result_backend = os.environ['HEROKU_REDIS_BLACK_URL']
 
+print(app.conf.broker_url)
+print(app.conf.result_backend)
+
+
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(settings.INSTALLED_APPS, force=True)
