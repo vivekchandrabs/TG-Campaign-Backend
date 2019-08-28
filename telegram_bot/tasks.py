@@ -8,6 +8,7 @@ from telegram_bot.models import Post, Series
 @app.task
 def send_message(series):
     
+    print("Beat is sending and the worker is receiving")
     series = Series.objects.get(pk=series)
     chat_id = series.group_id
     posts = Post.objects.filter(series=series, is_sent=False)
