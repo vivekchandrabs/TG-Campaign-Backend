@@ -14,8 +14,8 @@ app = Celery('speckbit_bot')
 # app.conf.broker_url = 'redis://localhost:6379/0'
 # app.conf.result_backend = 'redis://localhost:6379/0'
 
-app.conf.broker_url = os.environ['REDIS_URL']
-app.conf.result_backend = os.environ['REDIS_URL']
+app.conf.broker_url = redis.from_url(os.environ['REDIS_URL'])
+app.conf.result_backend = redis.from_url(os.environ['REDIS_URL'])
 
 print(app.conf.broker_url)
 print(app.conf.result_backend)
