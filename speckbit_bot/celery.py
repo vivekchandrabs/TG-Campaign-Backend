@@ -11,14 +11,9 @@ os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 django.setup()
 
 app = Celery('speckbit_bot')
-# app.conf.broker_url = 'redis://localhost:6379/0'
-# app.conf.result_backend = 'redis://localhost:6379/0'
 
-app.conf.broker_url = os.environ.get('REDIS_URL', "redis://localhost:6379")
-app.conf.result_backend = os.environ.get('REDIS_URL', "redis://localhost:6379")
-
-print(app.conf.broker_url)
-print(app.conf.result_backend)
+app.conf.broker_url = redis.from_url(os.environ.get('REDIS_URL', "redis://localhost:6379"))
+app.conf.result_backend = redis.from_url(os.environ.get('REDIS_URL', "redis://localhost:6379"))
 
 
 app.config_from_object('django.conf:settings')

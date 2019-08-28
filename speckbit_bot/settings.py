@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+import redis
 import djcelery
 djcelery.setup_loader()
 
@@ -99,12 +100,13 @@ DATABASES = {
       }
   }
 
-# CELERY_BROKER_URL = 'redis://localhost:6379'
 
-CELERY_BROKER_URL = os.environ.get('REDIS_URL', "redis://localhost:6379")
+CELERY_BROKER_URL = redis.from_url(os.environ.get('REDIS_URL', "redis://localhost:6379"))
 BROKER_TRANSPORT = 'redis'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+print(CELERY_BROKER_URL)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
