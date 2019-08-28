@@ -11,8 +11,11 @@ os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 django.setup()
 
 app = Celery('speckbit_bot')
-app.conf.broker_url = 'redis://localhost:6379/0'
-app.conf.result_backend = 'redis://localhost:6379/0'
+# app.conf.broker_url = 'redis://localhost:6379/0'
+# app.conf.result_backend = 'redis://localhost:6379/0'
+
+app.conf.broker_url = os.environ['REDIS_URL']
+app.conf.result_backend = os.environ['REDIS_URL']
 
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(settings.INSTALLED_APPS, force=True)

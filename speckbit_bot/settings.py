@@ -97,7 +97,8 @@ DATABASES = {
       }
   }
 
-CELERY_BROKER_URL = 'redis://localhost:6379' 
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = os.environ['REDIS_URL'] 
 BROKER_TRANSPORT = 'redis'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
