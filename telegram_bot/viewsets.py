@@ -271,7 +271,7 @@ class CustomMessageViewSet(viewsets.ViewSet):
         content = request.data["content"]
         chat_id = request.data["chat_id"]
 
-        url = f"https://api.telegram.org/bot981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A/sendMessage?chat_id={chat_id}&text={content}"
+        url = f"https://api.telegram.org/bot981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A/sendMessage?chat_id={chat_id}&text={content}&parse_mode=HTML"
         data = requests.get(url)
         print(data.text)
 

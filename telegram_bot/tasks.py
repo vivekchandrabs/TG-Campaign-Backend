@@ -21,7 +21,7 @@ def send_message(series):
     	title = post.title
     	content = post.content
 
-    	url = f"https://api.telegram.org/bot981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A/sendMessage?chat_id={chat_id}&text={content}"
+    	url = f"https://api.telegram.org/bot981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A/sendMessage?chat_id={chat_id}&text={content}&parse_mode=Markdown"
     	data = requests.get(url)
 
     else:
