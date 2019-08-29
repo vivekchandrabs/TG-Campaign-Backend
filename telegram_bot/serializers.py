@@ -32,7 +32,7 @@ class SeriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Series
         fields = ("id", "title", "author", "start_date", "no_of_post", "is_sent", 
-                    "to_repeat", "posts", "group_id", "periodic_task")
+                    "to_repeat", "posts", "group_id", "api_key", "periodic_task")
         depth = 1
         
 
@@ -42,7 +42,7 @@ class SeriesInfoSerialier(serializers.ModelSerializer):
 
     class Meta:
         model = Series
-        fields = ("id", "title", "author", "start_date", "no_of_post", "is_sent", "to_repeat", "group_id")
+        fields = ("id", "title", "author", "start_date", "no_of_post", "is_sent", "to_repeat", "group_id", "api_key")
         
 
 class PostSerializer(serializers.ModelSerializer):
