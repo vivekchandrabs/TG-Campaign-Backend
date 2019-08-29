@@ -25,8 +25,7 @@ def send_message(series):
 		url = f"https://api.telegram.org/bot{api_key}/sendMessage?chat_id={chat_id}&text={content}&parse_mode=Markdown"
 		data = requests.get(url)
 
-	if len(posts) == 1:
-		print("ksfdjksdfkhskfhskdfhksdfhksfhdkshdfkhfk")
+	if len(posts) == 0:
 		series.is_sent = True
 		series.save()
 
