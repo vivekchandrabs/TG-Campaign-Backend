@@ -19,7 +19,8 @@ PERIOD_CHOICES = {
 }
 
 def create_periodic_schedule(periodic_schedule, series):
-    if periodic_schedule == "daily":
+        
+    if periodic_schedule == "daily" or periodic_schedule == {}:
         cron_tab = CrontabSchedule.objects.create(hour=12)
         series.to_repeat = "Every_day"
 
@@ -67,12 +68,15 @@ class SeriesViewSet(viewsets.ModelViewSet):
     def create(self, request):
         title = request.data["title"]
         group_id = request.data["group_id"]
+        api_key = request.data["api_key"]
         posts = request.data.get("posts")
         author = request.user     
         interval = request.data.get("interval")
         periodic_schedule = request.data.get("periodic_schedule")
+        print(periodic_schedule)
 
-        series = Series.objects.create(title=title, author=author, group_id=group_id)
+        series = Series.objects.create(title=title, author=author, 
+                                       group_id=group_id, api_key=api_key)
 
         if PeriodicTask.objects.filter(name=title).exists():
             return Response({"err":"This Name is Already taken"}, status=403)
@@ -270,8 +274,10 @@ class CustomMessageViewSet(viewsets.ViewSet):
         title = request.data["title"]
         content = request.data["content"]
         chat_id = request.data["chat_id"]
+        api_key = request.data["api_key"]
+        # api_key = "981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A"
 
-        url = f"https://api.telegram.org/bot981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A/sendMessage?chat_id={chat_id}&text={content}&parse_mode=HTML"
+        url = f"https://api.telegram.org/bot{api_key}/sendMessage?chat_id={chat_id}&text={content}&parse_mode=HTML"
         data = requests.get(url)
         print(data.text)
 
