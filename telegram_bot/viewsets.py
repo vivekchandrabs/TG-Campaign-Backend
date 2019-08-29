@@ -224,7 +224,11 @@ class PostViewSet(viewsets.ModelViewSet):
                                             content=content, 
                                             series=series_instance)
         series_instance.no_of_post += 1
+        series_instance.is_sent = False
         series_instance.save()
+
+        series_instance.periodic_task.enabled = True
+        series_instance.periodic_task.save()
 
         serialized_data = PostSerializer(post_instance).data
         return Response(serialized_data)
