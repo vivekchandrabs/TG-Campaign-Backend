@@ -6,3 +6,7 @@ from django.shortcuts import render
 # app.conf.result_backend = 'redis://localhost:6379/0'
 
 # CELERY_BROKER_URL = 'redis://localhost:6379'
+
+# python manage.py celery worker --loglevel=info --beat
+
+# os.environ.get('REDISCLOUD_URL', "redis://localhost:6379")
