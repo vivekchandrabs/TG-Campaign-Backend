@@ -8,6 +8,7 @@ class Series(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     group_id = models.CharField(max_length=100)
+    api_key = models.CharField(max_length=200)
     start_date = models.DateField(auto_now_add=True)
     no_of_post = models.IntegerField(default=0, null=True, blank=True)
     is_sent = models.BooleanField(default=False, null=True, blank=True)
