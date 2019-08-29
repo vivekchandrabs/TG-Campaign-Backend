@@ -10,3 +10,6 @@ from django.shortcuts import render
 # python manage.py celery worker --loglevel=info --beat
 
 # os.environ.get('REDISCLOUD_URL', "redis://localhost:6379")
+
+# worker: celery worker --app=telegram_bot.tasks.app
+# celery_beat: python manage.py celery beat --loglevel=info
