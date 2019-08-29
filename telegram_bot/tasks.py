@@ -26,7 +26,7 @@ def send_message(series):
     	data = requests.get(url)
 
     if len(posts) == 1:
-
+        print("ksfdjksdfkhskfhskdfhksdfhksfhdkshdfkhfk")
     	series.is_sent = True
     	series.save()
 
