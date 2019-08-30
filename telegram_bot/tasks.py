@@ -24,7 +24,7 @@ def send_message(series):
 
 		content = content.replace("</p><p>", "\n")
 		content = content.replace("<p>", "")
-		content = content.replace("</p>", "")
+		content = content.replace("</p>", "\n")
 		content = content.replace("<br>", "\n")
 
 		url = f"https://api.telegram.org/bot{api_key}/sendMessage?chat_id={chat_id}&text={content}&parse_mode=html"
