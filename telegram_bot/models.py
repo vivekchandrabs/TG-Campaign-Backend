@@ -32,3 +32,13 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title} | {self.series.title}"
+
+
+class CustomMessage(models.Model):
+    series = models.ForeignKey(Series, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
+    content = models.TextField(default=None, null=True, blank=True)
+    sent_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title}"

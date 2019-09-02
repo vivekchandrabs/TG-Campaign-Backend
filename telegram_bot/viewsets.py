@@ -8,7 +8,7 @@ from django.utils import timezone
 import json
 import requests
 
-from telegram_bot.models import Post, Series
+from telegram_bot.models import Post, Series, CustomMessage
 from telegram_bot.serializers import *
 
 PERIOD_CHOICES = {
@@ -269,12 +269,16 @@ class SignupViewSet(viewsets.ViewSet):
         token = Token.objects.create(user=user)
         return Response({"token":token.key})
         
-class CustomMessageViewSet(viewsets.ViewSet):
+class CustomMessageViewSet(viewsets.ModelViewSet):
+
+    serializer_class = CustomMessageSerializer
+    permission_classes = (IsAuthenticated,)
 
     def create(self, request):
         title = request.data["title"]
         content = request.data["content"]
         chat_id = request.data["chat_id"]
+        series_id = request.data["series_id"]
         api_key = request.data["api_key"]
         # api_key = "981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A"
 
@@ -283,9 +287,25 @@ class CustomMessageViewSet(viewsets.ViewSet):
         content = content.replace("</p>", "\n")
         content = content.replace("<br>", "\n")
 
-        print(content)
         url = f"https://api.telegram.org/bot{api_key}/sendMessage?chat_id={chat_id}&text={content}&parse_mode=html"
         data = requests.get(url)
-        print(data.text)
 
-        return Response({"message":"Message Sent"})
+        series = Series.objects.get(pk=series_id)
+
+        if data.status_code == 200:
+            custom_message = CustomMessage.objects.create(title=title, 
+                                                        series=series,
+                                                        content=content)
+
+            return Response({"message":"Message Sent"})
+
+        return Response({"err":"The Text Format is not proper"}, status=403)
+
+    def list(self, request):
+        series_id = request.GET.get("series_id")
+
+        series_instance = Series.objects.get(pk=series_id)
+        custom_message_instances = CustomMessage.objects.filter(series=series_instance)
+        serialized_data = CustomMessageSerializer(custom_message_instances, many=True).data
+
+        return Response(serialized_data)

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from djcelery.models import PeriodicTask, IntervalSchedule, CrontabSchedule
 
-from telegram_bot.models import Post, Series
+from telegram_bot.models import Post, Series, CustomMessage
 
 class UserSerializer(serializers.ModelSerializer):
     
@@ -72,3 +72,12 @@ class CrontabScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = CrontabSchedule
         fields = "__all__"
+
+
+class CustomMessageSerializer(serializers.ModelSerializer):
+
+    series = SeriesInfoSerialier()
+
+    class Meta:
+        model = CustomMessage
+        fields = ("id", "title", "content", "sent_time", "series")
