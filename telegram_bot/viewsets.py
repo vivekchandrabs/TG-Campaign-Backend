@@ -21,19 +21,19 @@ PERIOD_CHOICES = {
 def create_periodic_schedule(periodic_schedule, series):
         
     if periodic_schedule == "daily" or periodic_schedule == {}:
-        cron_tab = CrontabSchedule.objects.create(hour=12)
+        cron_tab = CrontabSchedule.objects.create(hour=12, minute=15)
         series.to_repeat = "Every_day"
 
     elif periodic_schedule == "wednesday":
-        cron_tab = CrontabSchedule.objects.create(day_of_week=3, hour=12)
+        cron_tab = CrontabSchedule.objects.create(day_of_week=3, hour=12, minute=15)
         series.to_repeat = "Every Wednesdays"
 
     elif periodic_schedule == "saturdays":
-        cron_tab = CrontabSchedule.objects.create(day_of_week=6, hour=12)
+        cron_tab = CrontabSchedule.objects.create(day_of_week=6, hour=12, minute=15)
         series.to_repeat = "Every Weekends"
 
     elif periodic_schedule == "mon_to_fri":
-        cron_tab = CrontabSchedule.objects.create(day_of_week=["mon","tue","wed","thur","fri"], hour=12)
+        cron_tab = CrontabSchedule.objects.create(day_of_week=["mon","tue","wed","thur","fri"], hour=12, minute=15)
         series.to_repeat = "Every Weekdays"
 
     return cron_tab
@@ -111,6 +111,8 @@ class SeriesViewSet(viewsets.ModelViewSet):
         series_pk = series.pk
         app_dict = {"series":str(series_pk)}
         app_json = json.dumps(app_dict)
+        print(app_json)
+
         periodic_task = PeriodicTask.objects.create(name=title, 
                                                     task="telegram_bot.tasks.send_message",
                                                     interval=interval, 
