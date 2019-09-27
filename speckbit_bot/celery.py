@@ -13,8 +13,8 @@ django.setup()
 
 app = Celery('speckbit_bot')
 
-app.conf.broker_url = "redis://h:pb65d80ca7193ffad8a487d340f9a3dc0c80ed0b33873df75edeed91cc705a4cf@ec2-3-213-249-196.compute-1.amazonaws.com:14739"
-app.conf.result_backend = "redis://h:pb65d80ca7193ffad8a487d340f9a3dc0c80ed0b33873df75edeed91cc705a4cf@ec2-3-213-249-196.compute-1.amazonaws.com:14739"
+app.conf.broker_url = "redis://h:pb65d80ca7193ffad8a487d340f9a3dc0c80ed0b33873df75edeed91cc705a4cf@ec2-52-2-13-96.compute-1.amazonaws.com:24989"
+app.conf.result_backend = "redis://h:pb65d80ca7193ffad8a487d340f9a3dc0c80ed0b33873df75edeed91cc705a4cf@ec2-52-2-13-96.compute-1.amazonaws.com:24989"
 
 
 app.config_from_object('django.conf:settings')
