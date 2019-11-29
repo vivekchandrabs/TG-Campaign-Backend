@@ -282,7 +282,6 @@ class CustomMessageViewSet(viewsets.ModelViewSet):
         chat_id = request.data["chat_id"]
         series_id = request.data["series_id"]
         api_key = request.data["api_key"]
-        # api_key = "981855943:AAHElrIJ01s9MeL_3w1vBAmgCAkb2DpFl2A"
 
         content = content.replace("</p><p>", "\n")
         content = content.replace("<p>", "")
