@@ -100,8 +100,8 @@ DATABASES = {
       }
   }
 
-# redis://h:pb65d80ca7193ffad8a487d340f9a3dc0c80ed0b33873df75edeed91cc705a4cf@ec2-52-2-13-96.compute-1.amazonaws.com:24989
-BROKER_URL = "redis://h:pb65d80ca7193ffad8a487d340f9a3dc0c80ed0b33873df75edeed91cc705a4cf@ec2-52-2-13-96.compute-1.amazonaws.com:24989"
+ 
+BROKER_URL = os.environ.get("REDIS_URL", 'redis://localhost:6379/0')
 BROKER_TRANSPORT = 'redis'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
