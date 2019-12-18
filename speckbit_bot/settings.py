@@ -44,8 +44,33 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djcelery',
+    "social_django",
+    "rest_social_auth",
+    'oauth2_provider', 
+    'rest_framework_social_oauth2', 
     'telegram_bot',
+
+
 ]
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = True
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '803025464556-ga946oj4obr4ks6ktcj2uabl512iipg1.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'kg6LSNR0KGEA0gENeHD8GxNx'
+
+SOCIAL_AUTH_GITHUB_KEY = "448c8f5d7b9855172f1b"
+SOCIAL_AUTH_GITHUB_SECRET = "3ecb3ba691bd02af6916aa39e89343ec41503df4"
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    # 'rest_framework_social_oauth2.backends.DjangoOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,6 +82,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+     'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 REST_FRAMEWORK = {
@@ -78,6 +105,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',                       
+                'social_django.context_processors.login_redirect',
+
             ],
         },
     },
@@ -133,7 +163,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -146,5 +176,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 
 django_heroku.settings(locals())
