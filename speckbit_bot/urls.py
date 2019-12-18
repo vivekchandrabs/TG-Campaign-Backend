@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from rest_framework.authtoken.views import obtain_auth_token
 
+
 urlpatterns = [
+
+    url(r'^api/login/', include('rest_social_auth.urls_token')),
     path('admin/', admin.site.urls),
     path('bot/', include("telegram_bot.urls")),
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('api-token-auth/', obtain_auth_token, name='current_user_token'),
 ]
+
+# npm install vue-authenticate vue-router axios vue-axios vue-resource
